@@ -12,9 +12,17 @@ macOS on the Microsoft Surface Laptop 3 thanks to [Acidanthera's OpenCore bootlo
 | SSD format       | APFS file system, GPT partition table |
 
 ## Abstract
+With its nice display, large and smooth trackpad, comfortable keyboard and its quite decent speakers, the `Surface Laptop 3` series is an excellent Hackintosh laptop. Moreover, the M.2 2230 SSD can be swapped easily for a larger one.
+
 Apart from ACPI S3 Sleep which is broken, everything on the `Intel 13.5-Inch and 15-Inch Surface Laptop 3` is working perfectly like on a real Mac. ACPI S4 Hibernate works great, though, and resuming from Hibernation takes around ten to fifteen seconds. The advantage Hibernate has over Sleep is that the device doesn't consume any power while in a hibernated state.
 
 The battery runtime is around five hours.
+
+> [!TIP]
+> For a near-perfect Hackintosh laptop, I recommend installing `macOS 13 Ventura` for now, as the builtin Intel Wireless chip works almost perfectly with Apple's iServices and Continuity features on Ventura.
+
+> [!IMPORTANT]
+> In order to have a working trackpad and keyboard in the installer as well as in the installed OS, you **MUST** downgrade the firmware of your `Surface Laptop 3` before launching the installer. To do so, follow [these straightforward instructions](https://github.com/jlempen/Surface-Laptop-3-OpenCore/edit/main/README.md#downgrading-the-uefi-firmware).
 
 ## Disclaimer
 This repository is neither a howto nor an installation manual. Using these files requires at least basic knowledge of [Acidanthera's OpenCore bootloader](https://github.com/acidanthera/OpenCorePkg), ACPI, UEFI and the art of hackintoshing in general. I recommend reading the excellent [Dortania's OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide), as well as all its linked resources. For those who wish to improve their hackintoshing knowledge, [5T33Z0's OC-Little-Translated](https://github.com/5T33Z0/OC-Little-Translated) repository is the most comprehensive resource I've found on the subject.
