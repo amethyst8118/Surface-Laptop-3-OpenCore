@@ -57,7 +57,7 @@ Windows and Linux should be detected automagically by the OpenCore boot loader e
 | USB Type-C 3.1 Gen 1 | Supports Power Delivery and DisplayPort |
 | Camera | 720p |
 | IR camera | Intel(R) AVStream Camera 2500, ISP Interface |
-| Keyboard / Trackpad | Microsoft Type Cover |
+| Keyboard / Trackpad | |
 | Display | 13.50 inch 3:2, 2256 x 1504 pixel or 15 inch 3:2, 2496 x 1664 pixel 201 PPI |
 | Touchscreen | 10-point capacitive |
 | Battery | |
