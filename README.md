@@ -22,7 +22,7 @@ The battery runtime is around five hours.
 > For a near-perfect Hackintosh laptop, I recommend installing `macOS 13 Ventura` for now, as the builtin Intel Wireless chip works almost perfectly with Apple's iServices and Continuity features on Ventura.
 
 > [!IMPORTANT]
-> In order to have a working trackpad and keyboard in the installer as well as in the installed OS, you **MUST** downgrade the firmware of your `Surface Laptop 3` before launching the installer. To do so, follow [these straightforward instructions](https://github.com/jlempen/Surface-Laptop-3-OpenCore/README.md#downgrading-the-uefi-firmware).
+> In order to have a working trackpad and keyboard in the installer as well as in the installed OS, you **MUST** downgrade the firmware of your `Surface Laptop 3` before launching the installer. To do so, [follow these straightforward instructions](https://github.com/jlempen/Surface-Laptop-3-OpenCore?tab=readme-ov-file#downgrading-the-uefi-firmware).
 
 ## Disclaimer
 This repository is neither a howto nor an installation manual. Using these files requires at least basic knowledge of [Acidanthera's OpenCore bootloader](https://github.com/acidanthera/OpenCorePkg), ACPI, UEFI and the art of hackintoshing in general. I recommend reading the excellent [Dortania's OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide), as well as all its linked resources. For those who wish to improve their hackintoshing knowledge, [5T33Z0's OC-Little-Translated](https://github.com/5T33Z0/OC-Little-Translated) repository is the most comprehensive resource I've found on the subject.
