@@ -14,23 +14,34 @@ macOS on the Microsoft Surface Laptop 3 thanks to [Acidanthera's OpenCore bootlo
 ## Abstract
 With its nice display, large and smooth trackpad, comfortable keyboard and its quite decent speakers, the `Surface Laptop 3` series is an excellent Hackintosh laptop. Moreover, the M.2 2230 SSD can be swapped easily for a larger one.
 
-Apart from ACPI S3 Sleep which is broken, everything on the `Intel 13.5-Inch and 15-Inch Surface Laptop 3` is working perfectly like on a real Mac. ACPI S4 Hibernate works great, though, and resuming from Hibernation takes around ten to fifteen seconds. The advantage Hibernate has over Sleep is that the device doesn't consume any power while in a hibernated state.
+Apart from ACPI S3 Sleep which is broken, everything on the `Intel 13.5-Inch and 15-Inch Surface Laptop 3` is working perfectly like on a real Mac. ACPI S4 Hibernate works great, though, and resuming from Hibernation takes around ten to fifteen seconds. The advantage Hibernate has over Sleep is that the device doesn't draw any power while in a hibernated state.
 
 The battery runtime is around five hours.
 
 > [!TIP]
-> For a near-perfect Hackintosh laptop, I recommend installing `macOS 13 Ventura` for now, as the builtin Intel Wireless chip works almost perfectly with Apple's iServices and Continuity features on Ventura.
+> I recommend installing `macOS 13 Ventura` rather than the newer `macOS 14 Sonoma` or `macOS 15 Sequoia`. The builtin Intel Wireless chip works almost perfectly with Apple's iServices and Continuity features on Ventura while those features are partially broken at the moment on newer versions of macOS.
 
 > [!IMPORTANT]
-> In order to have a working trackpad and keyboard in the installer as well as in the installed OS, you **MUST** downgrade the firmware of your `Surface Laptop 3` before launching the installer. To do so, [follow these straightforward instructions](https://github.com/jlempen/Surface-Laptop-3-OpenCore?tab=readme-ov-file#downgrading-the-uefi-firmware).
+> For macOS to be able to boot on the Surface Laptop 3, the `Secure Boot` option _**must be disabled**_ in the UEFI. The boot screen will then display a large red bar with a lock icon at the top of the display when Secure Boot is disabled. This is normal.
 
+> [!IMPORTANT]
+> The keyboard and trackpad are now working in the installer as well as in the installed OS, but the trackpad will be lagging/skipping every few seconds. Furthermore, the keyboard and trackpad will be unresponsive after resuming from hibernation. To fix those issues, you **MUST** downgrade the firmware of your `Surface Laptop 3`. To do so, [follow these instructions](https://github.com/jlempen/Surface-Laptop-3-OpenCore?tab=readme-ov-file#downgrading-the-uefi-firmware).
+>
+> Then, you **MUST** also replace `BigSurface.kext` and its dependencies with `BigSurfaceSLB3.kext` and its dependencies in your `config.plist` file by following [these instructions](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#replacing-bigsurfacekext-with-bigsurfaceslb3kext).
+
+> [!WARNING]
+> If the display turns off right before the installer starts, simply shut down your Surface Book by pressing the power button for 15 to 20 seconds and power it back on to reboot into the installer again. It might take two or three attempts. Also, there might be a few display artifacts during the installation, but the display will work just fine in the installed system.
+> 
+> If this method doesn't work for you, you could also add the boot argument `-igfxvesa` to the `NVRAM` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82` -> `boot-args` section of your `config.plist` file. This disables the Intel Graphics acceleration. Once macOS is installed, simply remove the `-igfxvesa` boot argument from your `config.plist` file and reboot your laptop to enjoy full graphics acceleration.
+
+> [!CAUTION]
+> At the moment, it is not possible to have Windows installed at the same time as macOS, as the SL3 will immediately update to the latest firmware again when you reboot into Windows, even if you turn off your WiFi or disable automatic Windows Updates. I haven't found a way to prevent this behaviour yet. Any kind of Linux distribution is fine, though.
+> 
 ## Disclaimer
 This repository is neither a howto nor an installation manual. Using these files requires at least basic knowledge of [Acidanthera's OpenCore bootloader](https://github.com/acidanthera/OpenCorePkg), ACPI, UEFI and the art of hackintoshing in general. I recommend reading the excellent [Dortania's OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide), as well as all its linked resources. For those who wish to improve their hackintoshing knowledge, [5T33Z0's OC-Little-Translated](https://github.com/5T33Z0/OC-Little-Translated) repository is the most comprehensive resource I've found on the subject.
 
 ## Recommendations
 I recommend completely erasing the device's SSD by creating a new GPT partition table before attempting to install macOS, as it makes the installation process much easier. You may use any Linux live ISO with a partitioning tool such as `GParted` or `KPartition` to erase the SSD.
-
-For macOS to be able to boot on the Surface Laptop 3, the `Secure Boot` option _**must be disabled**_ in the UEFI. The boot screen will then display a large red bar with a lock icon at the top of the display when Secure Boot is disabled. This is normal.
 
 Please be aware that all `PlatformInfo` and `SMBIOS` information was removed from the OpenCore `config.plist` file. Users will therefore need to generate their own `PlatformInfo` with [CorpNewt's GenSMBIOS tool](https://github.com/corpnewt/GenSMBIOS) before attempting to boot a Surface Laptop 3 with this repository's EFI folder.
 
@@ -39,6 +50,8 @@ Please be aware that all `PlatformInfo` and `SMBIOS` information was removed fro
 An UEFI firmware released by Micro$oft in August 2023 broke the Surface Laptop 3's trackpad in macOS in several ways. Downgrading the UEFI firmware to the last known working version `13.101.140.0` is required to fix the trackpad and hibernate mode 25 on macOS. See the detailed instructions below to easily downgrade the UEFI firmware. This needs to be done before installing any version of macOS or you won't have a working trackpad and/or keyboard during installation.
 
 `AirportItlwm-Ventura.kext`, `AirportItlwm-Sonoma140.kext` and `AirportItlwm-Sonoma144.kext` from the [OpenIntelWireless repo](https://github.com/OpenIntelWireless/itlwm) are required to enable the Wifi chip. This EFI will dynamically load the appropriate kext for macOS Ventura or Sonoma depending on the running kernel. No need to manually replace the kext file when updating your version of macOS. As the Intel Wifi chip does not yet work with the `AirportItlwm.kext` in macOS Sequoia, you'll need to use the `Itlwm.kext` and its companion app [HeliPort](https://github.com/OpenIntelWireless/HeliPort/releases) to connect to a Wifi network. You'll find the latest stable `HeliPort.dmg` in the [Tools folder](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/Tools/HeliPort.dmg) of this repo. This EFI will dynamically load the `Itlwm.kext` instead of `AirportItlwm.kext` when you boot into macOS Sequoia.
+
+This repository uses the unofficial OpenCore_NO_ACPI_Build fork of OpenCore by [btwise](https://gitee.com/btwise/OpenCore_NO_ACPI), wich is not endorsed by Acidanthera (the dev team behind OpenCore). The main (and only) difference between this fork and the official OpenCore version is that it allows to prevent ACPI injection (e.g. patches, tables, boot parameters) into other OSes besides macOS.
 
 Windows and Linux should be detected automagically by the OpenCore boot loader even when installed after macOS.
 
@@ -131,7 +144,14 @@ In order to fix the skipping/lagging trackpad in macOS and make the trackpad and
 
 1. Boot with a Linux Live USB stick, preferably a Debian, Arch or Fedora based distribution (I use the Arch-based Manjaro).
 2. Download and unzip the compressed firmware archive [SurfaceLaptop3_FW_13.101.140.0.zip](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/UEFI%20Firmware/SurfaceLaptop3_FW_13.101.140.0.zip) from this repository.
-3. Add the line `OnlyTrusted=false` to the `/etc/fwupd/daemon.conf` config file.
+3. Add the line `OnlyTrusted=false` to the `/etc/fwupd/daemon.conf` config file. On some Linux distros such as Arch, endeavourOS and Manjaro, the config file to change is `/etc/fwupd/fwupd.conf`:
+```
+sudo nano /etc/fwupd/daemon.conf
+```
+or
+```
+sudo nano /etc/fwupd/fwupd.conf
+```
 4. Open a terminal and navigate to the folder where you extracted the firmware files.
 5. Connect your Surface device to a power supply.
 6. Copy the following lines and paste them into the terminal:
@@ -151,7 +171,32 @@ Now restart while holding the F4/Volume Up key to check the firmware version in 
 
 Reboot and you're done.
 
-If you are using Windows on the laptop, you'll have to find a way to prevent Windows Update from updating the firmware to the latest version again! I don't know how to do that, but DuckDuckGo is your friend.
+If you are using Windows on the laptop, you'll have to find a way to prevent Windows Update from automatically updating the firmware to the latest firmware version again on the next reboot into Windows! I haven't found a way to prevent this yet. Any kind of Linux distribution is fine, though.
+</details>
+
+<details>
+  <summary>Replacing BigSurface.kext with BigSurfaceSLB3.kext</summary>
+  
+## Replacing BigSurface.kext with BigSurfaceSLB3.kext
+Additionally, to fix the skipping/lagging trackpad in macOS and make the trackpad and keyboard work after hibernation, you also have to replace the official `BigSurface.kext` with the `BigSurfaceSLB3.kext`. 
+
+In the `Kernel` -> `Add` section of your `config.plist` file, disable or delete the following kexts:
+```
+BigSurface.kext/Contents/PlugIns/VoodooGPIO.kext
+BigSurface.kext/Contents/PlugIns/VoodooSerial.kext
+BigSurface.kext/Contents/PlugIns/VoodooInput.kext
+BigSurface.kext
+BigSurface.kext/Contents/PlugIns/BigSurfaceHIDDriver.kext
+```
+Then enable the following kexts:
+```
+BigSurfaceSLB3.kext/Contents/PlugIns/VoodooGPIO.kext
+BigSurfaceSLB3.kext/Contents/PlugIns/VoodooSerial.kext
+BigSurfaceSLB3.kext/Contents/PlugIns/VoodooInput.kext
+BigSurfaceSLB3.kext
+BigSurfaceSLB3.kext/Contents/PlugIns/BigSurfaceHIDDriver.kext
+```
+Save your `config.plist` file and reboot. Your trackpad should now be buttery smooth before and after resuming from hibernation. The keyboard will now also work after resuming from hibernation.
 </details>
 
 <details>
@@ -193,6 +238,39 @@ I recommend downloading and installing [BetterDisplay](https://github.com/waydab
 </details>
 
 <details>
+  <summary>Installing the IPTSDaemon to enable the touchscreen</summary>
+  
+## Installing the IPTSDaemon to enable the touchscreen
+The [IPTSDaemon](https://github.com/Xiashangning/IPTSDaemon) is a tool made by the author of BigSurface [Xiashangning](https://github.com/Xiashangning). It enables the touchscreen on Surface devices running macOS.
+
+1. Download the [IPTSDaemon](https://github.com/jlempen/Surface-Book-3-OpenCore/blob/main/Tools/IPTSDaemon.zip)
+2. Unzip the downloaded file
+3. Open a `Terminal` and navigate to the `IPTSDaemon` folder:
+```
+cd /Downloads/IPTSDaemon/IPTSDaemon
+```
+4. Run the `install_daemon.sh` file:
+```
+sudo bash install_daemon.sh
+```
+5. Enter your password to install the daemon
+
+Now you'll see a nasty popup window:
+
+![Nasty popup window](https://github.com/user-attachments/assets/eacbfe79-04a4-4bd8-b851-ba83cd55e9b6)
+
+This is actually macOS's way of telling you that Apple considers that the software is from an untrusted source because it is unsigned. But it's actually very easy to tell it to open the file anyway.
+
+Click on the "Show in Finder" button of this popup window, then right-click on the `libinih.0.dylib` file and select the first option, "Open". Nothing will happen, but the annoying popup window will not show anymore for this file. Now repeat the same procedure for the `libfmt.9.dylib` file and you're done.
+
+Perhaps you'll need to repeat this a few times, as the popup window appearing for one file will block the "Open" popup window for the other file and vice versa. Basically, once there's no warning popup appearing anymore, both files were registered and started.
+
+You may now verify that the multitouch gestures are working on your touchscreen by playing around with the standard macOS multitouch gestures you're used to on your trackpad, but the same gestures now work on the touchscreen as well :-)
+
+These instructions are confirmed working on SL3 and SB3 running macOS Ventura and Sonoma. On macOS Sequoia, the procedure is pretty much similar, but there won't be a "Show in Finder" button in the popup window. To open the dylib files, you'll have to go to the `System Settings` -> `Privacy and Security` -> `Security` section and open the files from there.
+</details>
+
+<details>
   <summary>Fixing broken Apple Messages and FaceTime</summary>
   
 ## Fixing broken Apple Messages and FaceTime
@@ -205,4 +283,6 @@ The latest version 2.3.0 of itlwm.kext is already included in the Kext folder an
   
 ## Related repositories
 * https://github.com/jc-bao/surface-laptop3-ventura
+* https://github.com/Xiashangning/BigSurface
+* https://github.com/Xiashangning/IPTSDaemon
 </details>
