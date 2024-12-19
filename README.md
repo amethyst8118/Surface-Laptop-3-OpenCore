@@ -30,7 +30,7 @@ The battery runtime is around five hours.
 > Then, you **MUST** also replace `BigSurface.kext` and its dependencies with `BigSurfaceSLB3.kext` and its dependencies in your `config.plist` file by following [these instructions](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#replacing-bigsurfacekext-with-bigsurfaceslb3kext).
 
 > [!WARNING]
-> If the display turns off right before the installer starts, simply shut down your Surface Book by pressing the power button for 15 to 20 seconds and power it back on to reboot into the installer again. It might take two or three attempts. Also, there might be a few display artifacts during the installation, but the display will work just fine in the installed system.
+> If the display turns off right before the installer starts, simply shut down your Surface Laptop by pressing the power button for 15 to 20 seconds and power it back on to reboot into the installer again. It might take two or three attempts. Also, there might be a few display artifacts during the installation, but the display will work just fine in the installed system.
 > 
 > If this method doesn't work for you, you could also add the boot argument `-igfxvesa` to the `NVRAM` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82` -> `boot-args` section of your `config.plist` file. This disables the Intel Graphics acceleration. Once macOS is installed, simply remove the `-igfxvesa` boot argument from your `config.plist` file and reboot your laptop to enjoy full graphics acceleration.
 
