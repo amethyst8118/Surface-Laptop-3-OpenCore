@@ -229,7 +229,19 @@ A very simple fix for this issue is to [download and install Bluesnooze](https:/
   <summary>Enabling native HiDPI display settings in macOS</summary>
   
 ## Enabling native HiDPI display settings in macOS
-I recommend downloading and installing [BetterDisplay](https://github.com/waydabber/BetterDisplay) to change and manage the display resolutions on the Surface Laptop 3.
+On the installed macOS system, the default display resolution is less than ideal. To enable native HiDPI settings in the Display Preferences of macOS, download and run the [one-key-hidpi](https://github.com/jlempen/one-key-hidpi) script and select the option `(7) Manual input resolution`, then copy and paste the resolutions below into the terminal, press Enter and reboot for the changes to take effect. This will give you five sane preset resolutions for your Surface Laptop 3.
+
+For the 13.5-Inch Surface Laptop 3:
+```
+2254x1504 1920x1280 1600x1066 1344x896 1280x854 1128x752
+```
+
+For the 15-Inch Surface Laptop 3:
+```
+2496x1664 2254x1504 1920x1280 1600x1066 1344x896 1280x854 1248x832
+```
+
+You may also download and install [BetterDisplay](https://github.com/waydabber/BetterDisplay) to change and manage the display resolutions on the Surface Laptop 3.
 </details>
 
 <details>
