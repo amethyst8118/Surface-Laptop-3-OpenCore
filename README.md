@@ -29,14 +29,9 @@ The battery runtime is around five hours.
 >
 > Then, you **MUST** also replace `BigSurface.kext` and its dependencies with `BigSurfaceSLB3.kext` and its dependencies in your `config.plist` file by following [these instructions](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#replacing-bigsurfacekext-with-bigsurfaceslb3kext).
 
-> [!WARNING]
-> If the display turns off right before the installer starts, simply shut down your Surface Laptop by pressing the power button for 15 to 20 seconds and power it back on to reboot into the installer again. It might take two or three attempts. Also, there might be a few display artifacts during the installation, but the display will work just fine in the installed system.
-> 
-> If this method doesn't work for you, you could also add the boot argument `-igfxvesa` to the `NVRAM` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82` -> `boot-args` section of your `config.plist` file. This disables the Intel Graphics acceleration. Once macOS is installed, simply remove the `-igfxvesa` boot argument from your `config.plist` file and reboot your laptop to enjoy full graphics acceleration.
-
 > [!CAUTION]
 > At the moment, it is not possible to have Windows installed at the same time as macOS, as the SL3 will immediately update to the latest firmware again when you reboot into Windows, even if you turn off your WiFi or disable automatic Windows Updates. I haven't found a way to prevent this behaviour yet. Any kind of Linux distribution is fine, though.
-> 
+
 ## Disclaimer
 This repository is neither a howto nor an installation manual. Using these files requires at least basic knowledge of [Acidanthera's OpenCore bootloader](https://github.com/acidanthera/OpenCorePkg), ACPI, UEFI and the art of hackintoshing in general. I recommend reading the excellent [Dortania's OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide), as well as all its linked resources. For those who wish to improve their hackintoshing knowledge, [5T33Z0's OC-Little-Translated](https://github.com/5T33Z0/OC-Little-Translated) repository is the most comprehensive resource I've found on the subject.
 
