@@ -238,7 +238,7 @@ For the 13.5-Inch Surface Laptop 3:
 
 For the 15-Inch Surface Laptop 3:
 ```
-2496x1664 2254x1504 1920x1280 1600x1066 1344x896 1280x854 1248x832
+2496x1664 2250x1500 2048x1366 1920x1280 1600x1066 1344x896 1280x854 1248x832
 ```
 
 You may also download and install [BetterDisplay](https://github.com/waydabber/BetterDisplay) to change and manage the display resolutions on the Surface Laptop 3.
