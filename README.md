@@ -31,7 +31,8 @@ The battery runtime is around five hours.
 
 > [!CAUTION]
 > ~~At the moment, it is not possible to have Windows installed at the same time as macOS, as the SL3 will immediately update to the latest firmware again when you reboot into Windows, even if you turn off your WiFi or disable automatic Windows Updates. I haven't found a way to prevent this behaviour yet. Any kind of Linux distribution is fine, though.~~
-> As of 6 April 2025, @pnxl added instructions on how to run Windows on Surface Laptop 3, without Windows Update updating the firmware to the latest firmware version upon reboot. The instructions can be found [here](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#running-windows-without-updating-the-firmware).
+> 
+> As of 6 April 2025, [@pnxl](https://github.com/pnxl) added instructions on how to run Windows on Surface Laptop 3, without Windows Update updating the firmware to the latest firmware version upon reboot. The instructions can be found [here](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#running-windows-without-updating-the-firmware).
 
 ## Disclaimer
 This repository is neither a howto nor an installation manual. Using these files requires at least basic knowledge of [Acidanthera's OpenCore bootloader](https://github.com/acidanthera/OpenCorePkg), ACPI, UEFI and the art of hackintoshing in general. I recommend reading the excellent [Dortania's OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide), as well as all its linked resources. For those who wish to improve their hackintoshing knowledge, [5T33Z0's OC-Little-Translated](https://github.com/5T33Z0/OC-Little-Translated) repository is the most comprehensive resource I've found on the subject.
@@ -169,7 +170,7 @@ Reboot and you're done.
 
 ~~If you are using Windows on the laptop, you'll have to find a way to prevent Windows Update from automatically updating the firmware to the latest firmware version again on the next reboot into Windows! I haven't found a way to prevent this yet. Any kind of Linux distribution is fine, though.~~
 
-As of 6 April 2025, @pnxl added instructions on how to run Windows on Surface Laptop 3, without Windows Update updating the firmware to the latest firmware version upon reboot. The instructions can be found [here](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#running-windows-without-updating-the-firmware).
+As of 6 April 2025, [@pnxl](https://github.com/pnxl) added instructions on how to run Windows on Surface Laptop 3, without Windows Update updating the firmware to the latest firmware version upon reboot. The instructions can be found [here](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#running-windows-without-updating-the-firmware).
 </details>
 
 <details>
