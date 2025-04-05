@@ -191,7 +191,7 @@ After complete, follow the instructions to block device driver installation for 
 4. Under the `Restrictions` key, make a DWORD Value named `DenyDeviceIDs` and `DenyDeviceIDsRetroactive`. Set both values to 1.
 5. Create a new key under `Restrictions`, named `DenyDeviceIDs`.
 6. You should end up with something like this.
-![image](https://github.com/user-attachments/assets/9b456e37-baf3-419e-b0cc-b59fadc730c4)
+![Registry Editor showing DWORD values under Restrictions key](https://github.com/user-attachments/assets/038f12c7-022b-47c9-93fe-1b01a3d44bcd)
 
 We're not done just yet - let's continue.
 1. Open Device Manager, and locate, then expand the Firmware section.
@@ -201,7 +201,7 @@ We're not done just yet - let's continue.
 5. Right-click the top-most Hardware ID, and paste it in a text editor, temporarily.
 
 Repeat for all the remaining firmware modules. You should end up with something like this.
-![image](https://github.com/user-attachments/assets/02877452-26b4-4c8a-a01c-d8e0f82c81a6)
+![All Hardware IDs listed in a text document](https://github.com/user-attachments/assets/02877452-26b4-4c8a-a01c-d8e0f82c81a6)
 
 We're still not done! Hang in there.
 1. Go back to the Registry Editor, and go to the `DenyDeviceIDs` key we made.
@@ -214,7 +214,7 @@ Rinse and repeat for the rest of the Hardware IDs you copied. Increment the name
 > If you need to make lots of String Values, you'll find that it gets cumbersome to do (especially on a trackpad). You can use the following keyboard sequence to create String Values much faster: [Alt], [E], [N], [S], [number].
 
 In the end, you'll have something similar to this.
-![image](https://github.com/user-attachments/assets/76259a01-6a53-4416-b249-14190c45fe92)
+![Registry Editor showing all Hardware IDs added to DenyDevicesIDs key](https://github.com/user-attachments/assets/76259a01-6a53-4416-b249-14190c45fe92)
 
 Restart your computer to apply the changes.
 </details>
