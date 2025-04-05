@@ -30,7 +30,8 @@ The battery runtime is around five hours.
 > Then, you **MUST** also replace `BigSurface.kext` and its dependencies with `BigSurfaceSLB3.kext` and its dependencies in your `config.plist` file by following [these instructions](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#replacing-bigsurfacekext-with-bigsurfaceslb3kext).
 
 > [!CAUTION]
-> At the moment, it is not possible to have Windows installed at the same time as macOS, as the SL3 will immediately update to the latest firmware again when you reboot into Windows, even if you turn off your WiFi or disable automatic Windows Updates. I haven't found a way to prevent this behaviour yet. Any kind of Linux distribution is fine, though.
+> ~~At the moment, it is not possible to have Windows installed at the same time as macOS, as the SL3 will immediately update to the latest firmware again when you reboot into Windows, even if you turn off your WiFi or disable automatic Windows Updates. I haven't found a way to prevent this behaviour yet. Any kind of Linux distribution is fine, though.~~
+> As of 6 April 2025, @pnxl added instructions on how to run Windows on Surface Laptop 3, without Windows Update updating the firmware to the latest firmware version upon reboot. The instructions can be found [here](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#running-windows-without-updating-the-firmware).
 
 ## Disclaimer
 This repository is neither a howto nor an installation manual. Using these files requires at least basic knowledge of [Acidanthera's OpenCore bootloader](https://github.com/acidanthera/OpenCorePkg), ACPI, UEFI and the art of hackintoshing in general. I recommend reading the excellent [Dortania's OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide), as well as all its linked resources. For those who wish to improve their hackintoshing knowledge, [5T33Z0's OC-Little-Translated](https://github.com/5T33Z0/OC-Little-Translated) repository is the most comprehensive resource I've found on the subject.
@@ -166,7 +167,55 @@ Now restart while holding the F4/Volume Up key to check the firmware version in 
 
 Reboot and you're done.
 
-If you are using Windows on the laptop, you'll have to find a way to prevent Windows Update from automatically updating the firmware to the latest firmware version again on the next reboot into Windows! I haven't found a way to prevent this yet. Any kind of Linux distribution is fine, though.
+~~If you are using Windows on the laptop, you'll have to find a way to prevent Windows Update from automatically updating the firmware to the latest firmware version again on the next reboot into Windows! I haven't found a way to prevent this yet. Any kind of Linux distribution is fine, though.~~
+
+As of 6 April 2025, @pnxl added instructions on how to run Windows on Surface Laptop 3, without Windows Update updating the firmware to the latest firmware version upon reboot. The instructions can be found [here](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/README.md#running-windows-without-updating-the-firmware).
+</details>
+
+<details>
+  <summary>Running Windows without updating the firmware</summary>
+  
+## Running Windows without updating the firmware
+Since Windows 7 (and Server 2008), Microsoft has added a way for system administrators to prevent the installation of device drivers for specific devices via a hardware ID block list. We can take advantage of this to prevent any firmware updates to the Surface UEFI firmware.
+
+First, you'll have to install Windows with the Surface recovery (as the Windows installer DOES NOT include the drivers to communicate with the Surface Aggregator Module which handles HID devices, oddly enough)
+
+Once you have Windows up and running, you'll want to install the last known working version of the drivers. Download [SurfaceLaptop3_Win10_19041_22.011.9779.0.msi](https://github.com/jlempen/Surface-Laptop-3-OpenCore/blob/main/Windows%20Drivers/SurfaceLaptop3_Win10_19041_22.011.9779.0.msi) from this repository. If you haven't downgraded your firmware, this will do that for you too.
+
+After complete, follow the instructions to block device driver installation for the Surface UEFI firmware.
+
+1. Open the Registry Editor, and navigate to `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows`
+2. Make a new key, named `DeviceInstall`
+3. Under that key, make another new key named `Restrictions`
+4. Under the `Restrictions` key, make a DWORD Value named `DenyDeviceIDs` and `DenyDeviceIDsRetroactive`. Set both values to 1.
+5. Create a new key under `Restrictions`, named `DenyDeviceIDs`.
+6. You should end up with something like this.
+![image](https://github.com/user-attachments/assets/9b456e37-baf3-419e-b0cc-b59fadc730c4)
+
+We're not done just yet - let's continue.
+1. Open Device Manager, and locate, then expand the Firmware section.
+2. You'll see a bunch of different firmware modules for the components on your Surface.
+3. Right-click on one, and click on Properties.
+4. Click on the details tab, and select Hardware IDs from the dropdown.
+5. Right-click the top-most Hardware ID, and paste it in a text editor, temporarily.
+
+Repeat for all the remaining firmware modules. You should end up with something like this.
+![image](https://github.com/user-attachments/assets/02877452-26b4-4c8a-a01c-d8e0f82c81a6)
+
+We're still not done! Hang in there.
+1. Go back to the Registry Editor, and go to the `DenyDeviceIDs` key we made.
+2. Create a new String Value, and name it `1`.
+3. Set the value to the first Hardware ID you copied.
+
+Rinse and repeat for the rest of the Hardware IDs you copied. Increment the names of the string values as you go. (Name 1 for the first, 2 for the second, and so on)
+
+> Pro tip!
+> If you need to make lots of String Values, you'll find that it gets cumbersome to do (especially on a trackpad). You can use the following keyboard sequence to create String Values much faster: [Alt], [E], [N], [S], [number].
+
+In the end, you'll have something similar to this.
+![image](https://github.com/user-attachments/assets/76259a01-6a53-4416-b249-14190c45fe92)
+
+Restart your computer to apply the changes.
 </details>
 
 <details>
